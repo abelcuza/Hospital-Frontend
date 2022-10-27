@@ -66,7 +66,7 @@ const SideBar = ({theme, open, action}) => (
         <Divider/>
         <List>
             {navItems.map(({text, icon, url}) => (
-                <Link to={url} style={linkStyle()}>
+                <Link key={url} to={url} style={linkStyle()}>
                     <NavItem text={text} icon={icon} open={open}/>
                 </Link>
             ))}
