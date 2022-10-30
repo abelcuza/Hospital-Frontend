@@ -1,9 +1,9 @@
 import React from 'react'
 import CustomTable from "../components/custom-table";
 
-const TableView = ({model}) => (
+const TableView = ({model, api, fields}) => (
     <div className="table-view">
-        <CustomTable fields={model.get_fields()}/>
+        <CustomTable fields={fields} api={api} model={model}/>
     </div>
 )
 
