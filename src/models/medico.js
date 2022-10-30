@@ -1,4 +1,5 @@
 export const medicoFields = ['nombre', 'apellidos', 'ci', 'email', 'direccion', 'categoria', 'especialidad', 'telefono']
+export const medicoModelName = "Médico"
 
 class MedicoModel {
     constructor(nombre, apellidos, ci, email = "", direccion = "", categoria = "", especialidad = "", telefono = "", ...args) {
