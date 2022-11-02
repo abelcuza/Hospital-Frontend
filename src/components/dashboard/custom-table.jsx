@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -7,7 +7,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import tableColumnsDescription from "../data/tableColumnsDescription";
+import tableColumnsDescription from "../../data/tableColumnsDescription";
+import EditIcon from '@mui/icons-material/Edit';
+import {Link} from "react-router-dom";
+import {useLocation} from "react-router";
+
 
 function createData(row, model) {
     const item = new model()
@@ -15,19 +19,10 @@ function createData(row, model) {
     return item.values();
 }
 
-const CustomTable = ({fields, api, model}) => {
-    const [data, setData] = useState(0)
+const CustomTable = ({fields, data, model}) => {
+    const location = useLocation()
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
-
-    async function fetchData() {
-        return await api.list()
-    }
-
-    useEffect(() => {
-        fetchData().then((data) => setData(data.data))
-    }, [])
-
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -52,6 +47,9 @@ const CustomTable = ({fields, api, model}) => {
                                     {tableColumnsDescription[field].label}
                                 </TableCell>
                             ))}
+                            <TableCell key="update">
+                                Edit
+                            </TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -59,8 +57,13 @@ const CustomTable = ({fields, api, model}) => {
                             data.map((row) => (
                                 <TableRow>
                                     {createData(row, model).map((val) => (
-                                        <TableCell key={val}>{val}</TableCell>
+                                        <TableCell>{val}</TableCell>
                                     ))}
+                                    <TableCell>
+                                        <Link to={`${location.pathname}/${row['ci']}`}>
+                                            <EditIcon/>
+                                        </Link>
+                                    </TableCell>
                                 </TableRow>
                             ))
                             : null
@@ -78,6 +81,7 @@ const CustomTable = ({fields, api, model}) => {
                 onRowsPerPageChange={handleChangeRowsPerPage}
             />
         </Paper>
+
     );
 }
 
