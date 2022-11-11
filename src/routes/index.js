@@ -6,6 +6,9 @@ import ConsultaModel from "../models/consulta";
 import medicoApi from "../api/medico";
 import Dashboard from "../pages/dashboard";
 import CreateView from "../pages/create-view";
+import DeleteMessage from "../pages/delete-message";
+import Login from "../pages/login";
+import Logout from "../pages/logout";
 
 export const authRoutes = [
     {
@@ -27,12 +30,22 @@ export const authRoutes = [
                         element: <CreateView model={MedicoModel} fields={medicoFields} api={medicoApi}
                                              model_name={medicoModelName}/>
                     },
+                    {
+                        path: '/medico/:id/delete',
+                        element: <DeleteMessage api={medicoApi}/>
+                    },
                 ]
             },
             {path: '/paciente', element: <ContentView model={PacienteModel}/>},
             {path: '/consulta', element: <ContentView model={ConsultaModel}/>},
-            {path: '/medicamento', element: <ContentView model={MedicamentoModel}/>}
+            {path: '/medicamento', element: <ContentView model={MedicamentoModel}/>},
+
         ]
-    },
+    }
+]
+
+export const publicRoutes = [
+    {path: "/login", element: <Login/>},
+    {path: '/logout', element: <Logout/>}
 
 ]
