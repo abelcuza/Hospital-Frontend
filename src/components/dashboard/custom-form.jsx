@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect} from "react"
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import formFieldsDescription from "../../data/formFieldsDescription";
@@ -8,6 +8,9 @@ const input_style = {
 }
 
 const CustomForm = ({fields, setParams, values}) => {
+    useEffect(() => {
+        setParams(values)
+    }, [])
     const handleChange = (event) => {
         const {name, value} = event.target
         setParams(data => {
