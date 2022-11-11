@@ -27,7 +27,7 @@ const formFieldsDescription = {
     especialidad: {
         id: 'especialidad',
         label: 'Especialidad',
-        required: false
+        required: true
     },
     telefono: {
         id: 'telefono',
@@ -37,7 +37,7 @@ const formFieldsDescription = {
     categoria: {
         id: 'categoria',
         label: 'Categoría',
-        required: false
+        required: true
     },
 }
 
