@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import CustomForm from "../components/dashboard/custom-form";
 import Typography from "@mui/material/Typography";
 import {Container, Stack} from "@mui/material";
@@ -32,18 +32,47 @@ const header_style = {
     paddingBottom: 10
 }
 const CreateView = ({api, fields, model_name}) => {
-    const [params, setParams] = useState([])
-    const {data} = useOutletContext()
+    const [error, setError] = useState(false)
+    const [params, setParams] = useState({})
+    const {data, setNotificationData} = useOutletContext()
     const {id} = useParams()
+    useEffect(() => {
+        if (id) {
+            setParams(data.find(item => item['ci'] === id))
+        }
+    },);
+
     const handleSubmit = (e) => {
         e.preventDefault()
         id ?
-            api.update(params).then((resp) => {
-                console.log(resp)
+            api(id).update(params).then((resp) => {
+                resp.status !== 200 ?
+                    (
+                        setError(true)
+                    )
+                    :
+                    (
+                        setNotificationData({
+                            type: 'success',
+                            message: 'Success',
+                            open: true
+                        })
+                    )
             })
             :
-            api.create(params).then((resp) => {
-                console.log(resp)
+            api().create(params).then((resp) => {
+                resp.status !== 201 ?
+                    (
+                        setError(true)
+                    )
+                    :
+                    (
+                        setNotificationData({
+                            type: 'success',
+                            message: 'Success',
+                            open: true
+                        })
+                    )
             })
 
     }
