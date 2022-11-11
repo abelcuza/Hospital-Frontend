@@ -11,15 +11,9 @@ import tableColumnsDescription from "../../data/tableColumnsDescription";
 import EditIcon from '@mui/icons-material/Edit';
 import {Link} from "react-router-dom";
 import {useLocation} from "react-router";
+import {Delete} from "@mui/icons-material";
 
-
-function createData(row, model) {
-    const item = new model()
-    Object.assign(item, row)
-    return item.values();
-}
-
-const CustomTable = ({fields, data, model}) => {
+const CustomTable = ({fields, data}) => {
     const location = useLocation()
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -48,20 +42,28 @@ const CustomTable = ({fields, data, model}) => {
                                 </TableCell>
                             ))}
                             <TableCell key="update">
-                                Edit
+                                Editar
+                            </TableCell>
+                            <TableCell key="delete">
+                                Borrar
                             </TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {data ?
                             data.map((row) => (
-                                <TableRow>
-                                    {createData(row, model).map((val) => (
-                                        <TableCell>{val}</TableCell>
+                                <TableRow key={row['ci']}>
+                                    {fields.map((field) => (
+                                        <TableCell key={field}>{row[field]}</TableCell>
                                     ))}
                                     <TableCell>
                                         <Link to={`${location.pathname}/${row['ci']}`}>
-                                            <EditIcon/>
+                                            <EditIcon color="primary"/>
+                                        </Link>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Link to={`${location.pathname}/${row['ci']}/delete/`}>
+                                            <Delete color="error"/>
                                         </Link>
                                     </TableCell>
                                 </TableRow>
@@ -81,7 +83,6 @@ const CustomTable = ({fields, data, model}) => {
                 onRowsPerPageChange={handleChangeRowsPerPage}
             />
         </Paper>
-
     );
 }
 
