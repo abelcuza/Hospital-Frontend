@@ -1,21 +1,21 @@
 import {del, get, post, put} from "./index";
 
-const getApi = (endpoint = "", byID = false) => (
+const getApi = (endpoint = "", id = "") => (
     {
         get(param) {
-            return get(byID ? `${endpoint}${param}` : param,)
+            return get(`${endpoint}${id}/`, param)
         },
         list(params) {
             return get(endpoint, params)
         },
-        create(data) {
-            return post(endpoint, data)
+        create(data, headers) {
+            return post(endpoint, data, headers)
         },
         update(data) {
-            return put(endpoint, data)
+            return put(`${endpoint}${id}/`, data)
         },
         delete(param) {
-            return del(byID ? `${endpoint}${param}` : param,)
+            return del(`${endpoint}${id}/`, param)
         }
     }
 )
