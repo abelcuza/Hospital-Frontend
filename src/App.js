@@ -1,11 +1,12 @@
 import React from 'react'
 import './App.css';
 import {useRoutes} from "react-router";
-import {authRoutes} from "./routes";
+import {authRoutes, publicRoutes,} from "./routes";
 
 function App() {
     const routes = useRoutes([
-        ...authRoutes
+        ...authRoutes,
+        ...publicRoutes
     ])
     return (
         <div className="App">
