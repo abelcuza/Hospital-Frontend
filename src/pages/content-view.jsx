@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import {Link} from "react-router-dom";
 import {Outlet} from "react-router";
 import Notification from "../components/notifications";
+import Search from "../components/search";
 
 
 const buttonStyle = (form = false) => ({
@@ -20,19 +21,20 @@ const dataContext = createContext([])
 const ContentView = ({model, api, fields}) => {
     const [data, setData] = useState([])
     const [notificationData, setNotificationData] = useState({open: false})
-
-    async function fetchData() {
-        return await api().list()
-    }
+    const [searchParam, setSearchParam] = useState("")
 
     useEffect(() => {
+        async function fetchData() {
+            return await api().list({search: searchParam})
+        }
         fetchData().then((data) => setData(data.data))
-    }, [])
+    }, [searchParam])
 
     return (
         <dataContext.Provider value={data}>
             <Notification notificationData={notificationData} setNotificationData={setNotificationData}/>
             <div className="table-view">
+                <Search setSearchParam={setSearchParam}/>
                 <CustomTable fields={fields} data={data} model={model}/>
                 <Link style={linkStyle()} to="/medico/add"><Button variant="contained"
                                                                    style={buttonStyle()}>Añadir</Button></Link>
