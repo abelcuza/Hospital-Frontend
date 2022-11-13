@@ -2,42 +2,50 @@ const formFieldsDescription = {
     nombre: {
         id: 'nombre',
         label: 'Nombre',
-        required: true
+        required: true,
+        type: 'text'
     },
     apellidos: {
         id: 'apellidos',
         label: 'Apellidos',
-        required: true
+        required: true,
+        type: 'text'
     },
     ci: {
         id: 'ci',
         label: 'CI',
-        required: true
+        required: true,
+        type: 'text'
     },
     direccion: {
         id: 'direccion',
         label: 'Dirección',
-        required: true
+        required: true,
+        type: 'text'
     },
     email: {
         id: 'email',
         label: 'Email',
-        required: true
+        required: true,
+        type: 'text'
     },
     especialidad: {
         id: 'especialidad',
         label: 'Especialidad',
-        required: true
+        required: true,
+        type: 'text'
     },
     telefono: {
         id: 'telefono',
         label: 'Teléfono',
-        required: true
+        required: true,
+        type: 'text'
     },
     categoria: {
         id: 'categoria',
         label: 'Categoría',
-        required: true
+        required: true,
+        type: 'text'
     },
 }
 
