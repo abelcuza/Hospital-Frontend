@@ -47,7 +47,7 @@ const ContentView = ({model, api, fields}) => {
         <dataContext.Provider value={data}>
             <Notification notificationData={notificationData} setNotificationData={setNotificationData}/>
             <div className="table-view">
-                <Stack direction="row" sx={{marginBottom: "20px", marginTop: "20px", marginLeft: "20px"}} spacing={2}>
+                <Stack direction="row" sx={{marginBottom: "20px", marginTop: "20px",}} spacing={2}>
                     <SelectFilter setInputFilters={setInputFilters} inputFilters={inputFilters} filters={filters}/>
                     <Search setSearchParam={setSearchParam}/>
                 </Stack>
