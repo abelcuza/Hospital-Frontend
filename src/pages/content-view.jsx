@@ -5,6 +5,9 @@ import {Link} from "react-router-dom";
 import {Outlet} from "react-router";
 import Notification from "../components/notifications";
 import Search from "../components/search";
+import {Stack} from "@mui/material";
+import SelectFilter from "../components/filters";
+import FiltersForm from "../components/filters-form";
 
 
 const buttonStyle = (form = false) => ({
@@ -22,19 +25,33 @@ const ContentView = ({model, api, fields}) => {
     const [data, setData] = useState([])
     const [notificationData, setNotificationData] = useState({open: false})
     const [searchParam, setSearchParam] = useState("")
+    const [filters, setFilters] = useState([])
+    const [filterParams, setFilterParams] = useState({})
+    const [inputFilters, setInputFilters] = useState([])
+
+    useEffect(() => {
+        api("filters").get().then(resp => {
+            setFilters(resp.data['filters'])
+        })
+    }, [])
 
     useEffect(() => {
         async function fetchData() {
-            return await api().list({search: searchParam})
+            return await api().list({search: searchParam, ...filterParams})
         }
+
         fetchData().then((data) => setData(data.data))
-    }, [searchParam])
+    }, [searchParam, filterParams])
 
     return (
         <dataContext.Provider value={data}>
             <Notification notificationData={notificationData} setNotificationData={setNotificationData}/>
             <div className="table-view">
-                <Search setSearchParam={setSearchParam}/>
+                <Stack direction="row" sx={{marginBottom: "20px", marginTop: "20px", marginLeft: "20px"}} spacing={2}>
+                    <SelectFilter setInputFilters={setInputFilters} inputFilters={inputFilters} filters={filters}/>
+                    <Search setSearchParam={setSearchParam}/>
+                </Stack>
+                <FiltersForm setFilterParams={setFilterParams} inputFilters={inputFilters}/>
                 <CustomTable fields={fields} data={data} model={model}/>
                 <Link style={linkStyle()} to="/medico/add"><Button variant="contained"
                                                                    style={buttonStyle()}>Añadir</Button></Link>
@@ -45,3 +62,4 @@ const ContentView = ({model, api, fields}) => {
 }
 
 export default ContentView
+
