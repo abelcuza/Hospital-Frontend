@@ -1,9 +1,19 @@
-import React from 'react'
+import React, {createContext, useContext, useMemo, useState} from 'react'
 import './App.css';
 import {useRoutes} from "react-router";
 import {authRoutes, publicRoutes,} from "./routes";
+import {useTheme} from "@mui/material/styles";
+import {createTheme} from "@mui/material";
+import {ThemeProvider} from "@emotion/react";
 
-function App() {
+const ColorModeContext = createContext({
+    toggleColorMode: () => {
+    }
+})
+
+function MyApp() {
+    const theme = useTheme();
+    const colorMode = useContext(ColorModeContext);
     const routes = useRoutes([
         ...authRoutes,
         ...publicRoutes
@@ -12,7 +22,39 @@ function App() {
         <div className="App">
             {routes}
         </div>
+
     );
 }
 
 export default App;
+
+
+function App() {
+    const [mode, setMode] = useState('light');
+    const colorMode = useMemo(
+        () => ({
+            toggleColorMode: () => {
+                setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+            },
+        }),
+        [],
+    );
+
+    const theme = React.useMemo(
+        () =>
+            createTheme({
+                palette: {
+                    mode,
+                },
+            }),
+        [mode],
+    );
+
+    return (
+        <ColorModeContext.Provider value={colorMode}>
+            <ThemeProvider theme={theme}>
+                <MyApp/>
+            </ThemeProvider>
+        </ColorModeContext.Provider>
+    );
+}
