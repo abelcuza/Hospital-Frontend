@@ -5,7 +5,7 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import {Link} from "react-router-dom";
 import {WarningAmber} from "@mui/icons-material";
-import {useLocation, Navigate, useOutletContext, useParams} from "react-router";
+import {Navigate, useLocation, useOutletContext, useParams} from "react-router";
 
 const style = {
     position: 'absolute',
@@ -37,17 +37,18 @@ const DeleteMessage = ({api}) => {
             resp.status === 204 ?
                 setNotificationData({
                     type: 'success',
-                    message: 'Success',
+                    message: 'El objeto ha sido borrado satisfactoriamente',
                     open: true
                 })
+
                 :
                 setNotificationData({
                     type: 'error',
-                    message: 'Error',
+                    message: 'Ha habido un error a la hora de borrar el objeto',
                     open: true
                 })
+            return <Navigate to={location.pathname.split("/")[1]}/>
         })
-        return <Navigate to={location.pathname.split("/")[1]}/>
     }
 
     return (
@@ -62,11 +63,11 @@ const DeleteMessage = ({api}) => {
                     </div>
 
                     <Stack spacing={2} direction="row" justifyContent="center">
-                        <Link to="/medico" style={linkStyle()}>
+                        <Link to={`/${location.pathname.split("/")[1]}`} style={linkStyle()}>
                             <Button variant="contained" type="submit" onClick={handleOnClick}
                                     style={buttonStyle(true)}>Aceptar</Button>
                         </Link>
-                        <Link to="/medico" style={linkStyle()}>
+                        <Link to={`/${location.pathname.split("/")[1]}`} style={linkStyle()}>
                             <Button variant="contained" color="error"
                                     style={buttonStyle(true)}>Cancelar</Button>
                         </Link>
