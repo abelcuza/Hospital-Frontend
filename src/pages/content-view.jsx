@@ -34,6 +34,9 @@ const ContentView = ({model, api, fields}) => {
         api("filters").get().then(resp => {
             setFilters(resp.data['filters'])
         })
+        setSearchParam("")
+        setInputFilters([])
+        setFilterParams({})
     }, [location])
 
     useEffect(() => {
@@ -42,14 +45,14 @@ const ContentView = ({model, api, fields}) => {
         }
 
         fetchData().then((data) => setData(data.data))
-    }, [searchParam, filterParams, location, notificationData])
+    }, [searchParam, filterParams, notificationData])
 
     return (
         <dataContext.Provider value={data}>
             <Notification notificationData={notificationData} setNotificationData={setNotificationData}/>
             <Stack direction="row" sx={{marginBottom: "20px", marginTop: "20px",}} spacing={2}>
                 <SelectFilter setInputFilters={setInputFilters} inputFilters={inputFilters} filters={filters}/>
-                <Search setSearchParam={setSearchParam}/>
+                <Search setSearchParam={setSearchParam} searchParam={searchParam}/>
             </Stack>
             <FiltersForm setFilterParams={setFilterParams} inputFilters={inputFilters}/>
             <CustomTable fields={fields} data={data} model={model}/>
