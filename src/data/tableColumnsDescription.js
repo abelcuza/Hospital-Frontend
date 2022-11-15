@@ -136,6 +136,18 @@ const tableColumnsDescription = {
         minWidth: 170,
         type: 'pharagraph'
     },
+    medicamento: {
+        id: 'medicamento',
+        label: 'Medicamento',
+        minWidth: 170,
+        type: 'text'
+    },
+    cantidad: {
+        id: 'cantidad',
+        label: 'Cantidad',
+        minWidth: 170,
+        type: 'text'
+    },
 };
 
 export default tableColumnsDescription
