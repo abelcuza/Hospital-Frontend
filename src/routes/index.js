@@ -9,8 +9,9 @@ import Logout from "../pages/logout";
 import pacienteApi from "../api/paciente";
 import medicamentoApi from "../api/medicamento";
 import consultaApi from "../api/consulta";
+import inventarioApi from "../api/inventario";
 
-const {medico, paciente, consulta, medicamento} = models
+const {medico, paciente, consulta, medicamento, inventario} = models
 
 export const authRoutes = [
     {
@@ -45,12 +46,14 @@ export const authRoutes = [
                 children: [
                     {
                         path: '/paciente/add',
-                        element: <CreateView model={paciente.model} fields={Object.keys(paciente.model)} api={pacienteApi}
+                        element: <CreateView model={paciente.model} fields={Object.keys(paciente.model)}
+                                             api={pacienteApi}
                                              model_name={paciente.modelName}/>
                     },
                     {
                         path: '/paciente/:id',
-                        element: <CreateView model={paciente.model} fields={Object.keys(paciente.model)} api={pacienteApi}
+                        element: <CreateView model={paciente.model} fields={Object.keys(paciente.model)}
+                                             api={pacienteApi}
                                              model_name={paciente.modelName}/>
                     },
                     {
@@ -62,16 +65,18 @@ export const authRoutes = [
             {
                 path: '/consulta',
                 element: <ContentView model={consulta.model} fields={Object.keys(consulta.model)}
-                                                         api={consultaApi} model_name={consulta.modelName}/>,
+                                      api={consultaApi} model_name={consulta.modelName}/>,
                 children: [
                     {
                         path: '/consulta/add',
-                        element: <CreateView model={consulta.model} fields={Object.keys(consulta.model)} api={consultaApi}
+                        element: <CreateView model={consulta.model} fields={Object.keys(consulta.model)}
+                                             api={consultaApi}
                                              model_name={consulta.modelName}/>
                     },
                     {
                         path: '/consulta/:id',
-                        element: <CreateView model={consulta.model} fields={Object.keys(consulta.model)} api={consultaApi}
+                        element: <CreateView model={consulta.model} fields={Object.keys(consulta.model)}
+                                             api={consultaApi}
                                              model_name={consulta.modelName}/>
                     },
                     {
@@ -87,17 +92,42 @@ export const authRoutes = [
                 children: [
                     {
                         path: '/medicamento/add',
-                        element: <CreateView model={medicamento.model} fields={Object.keys(medicamento.model)} api={medicamentoApi}
+                        element: <CreateView model={medicamento.model} fields={Object.keys(medicamento.model)}
+                                             api={medicamentoApi}
                                              model_name={medicamento.modelName}/>
                     },
                     {
                         path: '/medicamento/:id',
-                        element: <CreateView model={medicamento.model} fields={Object.keys(medicamento.model)} api={medicamentoApi}
+                        element: <CreateView model={medicamento.model} fields={Object.keys(medicamento.model)}
+                                             api={medicamentoApi}
                                              model_name={medicamento.modelName}/>
                     },
                     {
                         path: '/medicamento/:id/delete',
                         element: <DeleteMessage api={medicamentoApi}/>
+                    },
+                ]
+            },
+            {
+                path: '/inventario',
+                element: <ContentView model={inventario.model} fields={Object.keys(inventario.model)}
+                                      api={inventarioApi} model_name={inventario.modelName}/>,
+                children: [
+                    {
+                        path: '/inventario/add',
+                        element: <CreateView model={inventario.model} fields={Object.keys(inventario.model)}
+                                             api={inventarioApi}
+                                             model_name={inventario.modelName}/>
+                    },
+                    {
+                        path: '/inventario/:id',
+                        element: <CreateView model={inventario.model} fields={Object.keys(inventario.model)}
+                                             api={inventarioApi}
+                                             model_name={inventario.modelName}/>
+                    },
+                    {
+                        path: '/inventario/:id/delete',
+                        element: <DeleteMessage api={inventarioApi}/>
                     },
                 ]
             },
@@ -109,5 +139,4 @@ export const authRoutes = [
 export const publicRoutes = [
     {path: "/login", element: <Login/>},
     {path: '/logout', element: <Logout/>}
-
 ]
