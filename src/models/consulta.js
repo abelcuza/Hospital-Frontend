@@ -1,7 +1,10 @@
 const ConsultaModel = {
+    id: "",
     medico: "",
     paciente: "",
-    get_fields: () => ["medico", "paciente"]
+    fecha: "",
+    medicamentos: "",
+    diagnostico: ""
 }
 
 export default ConsultaModel;

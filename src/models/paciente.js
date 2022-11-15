@@ -1,7 +1,13 @@
 const PacienteModel = {
+    id:"",
     nombre: "",
     apellidos: "",
-    get_fields: () => ["nombre", "apellidos"]
+    ci: "",
+    email: "",
+    telefono: "",
+    direccion: "",
+    municipio: "",
+    provincia: "",
 }
 
 export default PacienteModel;

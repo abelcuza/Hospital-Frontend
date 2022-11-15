@@ -1,19 +1,15 @@
-export const medicoFields = ['nombre', 'apellidos', 'ci', 'email', 'direccion', 'categoria', 'especialidad', 'telefono']
-export const medicoModelName = "Médico"
-
-class MedicoModel {
-    constructor(nombre, apellidos, ci, email = "", direccion = "", categoria = "", especialidad = "", telefono = "", ...args) {
-        this.nombre = nombre
-        this.apellidos = apellidos
-        this.ci = ci
-        this.email = email
-        this.direccion = direccion
-        this.categoria = categoria
-        this.especialidad = especialidad
-        this.telefono = telefono
-    }
-    values = () => ([this.nombre, this.apellidos, this.ci, this.email, this.direccion, this.categoria, this.especialidad, this.telefono])
-    keys = () => (medicoFields)
+const MedicoModel = {
+    id:"",
+    nombre: "",
+    apellidos: "",
+    ci: "",
+    email: "",
+    direccion: "",
+    grado_academico: "",
+    especialidad: "",
+    telefono: "",
+    municipio: "",
+    provincia: "",
 }
 
 export default MedicoModel;
