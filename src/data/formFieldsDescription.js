@@ -151,7 +151,7 @@ const formFieldsDescription = {
         id: 'medico',
         label: 'Médico',
         required: true,
-        type: 'text'
+        type: 'model'
     },
     paciente: {
         id: 'paciente',
@@ -169,11 +169,23 @@ const formFieldsDescription = {
         id: 'medicamentos',
         label: 'Medicamentos',
         required: true,
-        type: 'model'
+        type: 'list'
     },
     diagnostico: {
         id: 'diagnostico',
         label: 'Diagnóstico',
+        required: true,
+        type: 'text'
+    },
+    medicamento: {
+        id: 'medicamento',
+        label: 'Medicamento',
+        required: true,
+        type: 'model'
+    },
+    cantidad: {
+        id: 'cantidad',
+        label: 'Cantidad',
         required: true,
         type: 'text'
     },
