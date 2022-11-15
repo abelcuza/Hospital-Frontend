@@ -4,8 +4,8 @@ import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 const SelectField = ({id, label, values, required, setParams, fullWidth, width, defaultValue}) => {
     const [selectValue, setSelectValue] = useState("")
 
-    useEffect(()=>{
-        if (defaultValue){
+    useEffect(() => {
+        if (defaultValue) {
             setSelectValue(defaultValue)
         }
     }, [])
