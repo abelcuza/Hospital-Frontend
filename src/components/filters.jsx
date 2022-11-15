@@ -6,6 +6,7 @@ import formFieldsDescription from "../data/formFieldsDescription";
 const SelectFilter = ({filters, inputFilters, setInputFilters}) => (
         <Box sx={{width: 300, maxWidth: '100%'}}>
             <Autocomplete
+                limitTags={1}
                 value={inputFilters}
                 onChange={(e, value) => (
                     setInputFilters(value)
