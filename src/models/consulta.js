@@ -3,7 +3,7 @@ const ConsultaModel = {
     medico: "",
     paciente: "",
     fecha: "",
-    medicamentos: "",
+    medicamentos: [],
     diagnostico: ""
 }
 
