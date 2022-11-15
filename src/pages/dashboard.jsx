@@ -5,7 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TopBar from "../components/dashboard/top-bar";
 import SideBar from "../components/dashboard/side-bar";
 import DrawerHeader from "../components/dashboard";
-import {Outlet, Navigate} from "react-router";
+import {Navigate, Outlet} from "react-router";
 import Copyright from "../components/copyright";
 import {useSelector} from "react-redux";
 
@@ -27,7 +27,7 @@ const Dashboard = () => {
         setOpen(false);
     };
 
-    if(!auth){
+    if (!auth) {
         return <Navigate to="/login"/>
     }
 
@@ -37,7 +37,7 @@ const Dashboard = () => {
                 <CssBaseline/>
                 <TopBar open={open} user={user} action={handleDrawerOpen}/>
                 <SideBar open={open} action={handleDrawerClose} theme={theme}/>
-                <Box component="main" sx={{flexGrow: 1, p: 3, paddingTop: 3}}>
+                <Box component="main" sx={{flexGrow: 1, p: 3, paddingTop: 3, width: "80%"}}>
                     <DrawerHeader/>
                     <Outlet/>
                 </Box>
