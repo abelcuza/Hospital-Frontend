@@ -2,6 +2,7 @@ import MedicoModel from "./medico";
 import PacienteModel from "./paciente";
 import MedicamentoModel from "./medicamento";
 import ConsultaModel from "./consulta";
+import InventarioModel from "./inventario";
 
 const models = {
     medico: {
@@ -28,6 +29,12 @@ const models = {
         modelName: "Consulta",
         nameField: "paciente"
     },
+    inventario:{
+        model: InventarioModel,
+        pk: "id",
+        modelName: "Inventario",
+        nameField: "medicamento"
+    }
 }
 
 export default models
