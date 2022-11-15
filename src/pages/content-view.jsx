@@ -2,7 +2,7 @@ import React, {createContext, useEffect, useState} from 'react'
 import CustomTable from "../components/dashboard/custom-table";
 import Button from "@mui/material/Button";
 import {Link} from "react-router-dom";
-import {Outlet} from "react-router";
+import {Outlet, useLocation} from "react-router";
 import Notification from "../components/notifications";
 import Search from "../components/search";
 import {Stack} from "@mui/material";
@@ -28,12 +28,13 @@ const ContentView = ({model, api, fields}) => {
     const [filters, setFilters] = useState([])
     const [filterParams, setFilterParams] = useState({})
     const [inputFilters, setInputFilters] = useState([])
+    const location = useLocation()
 
     useEffect(() => {
         api("filters").get().then(resp => {
             setFilters(resp.data['filters'])
         })
-    }, [])
+    }, [location])
 
     useEffect(() => {
         async function fetchData() {
@@ -41,22 +42,20 @@ const ContentView = ({model, api, fields}) => {
         }
 
         fetchData().then((data) => setData(data.data))
-    }, [searchParam, filterParams])
+    }, [searchParam, filterParams, location, notificationData])
 
     return (
         <dataContext.Provider value={data}>
             <Notification notificationData={notificationData} setNotificationData={setNotificationData}/>
-            <div className="table-view">
-                <Stack direction="row" sx={{marginBottom: "20px", marginTop: "20px",}} spacing={2}>
-                    <SelectFilter setInputFilters={setInputFilters} inputFilters={inputFilters} filters={filters}/>
-                    <Search setSearchParam={setSearchParam}/>
-                </Stack>
-                <FiltersForm setFilterParams={setFilterParams} inputFilters={inputFilters}/>
-                <CustomTable fields={fields} data={data} model={model}/>
-                <Link style={linkStyle()} to="/medico/add"><Button variant="contained"
-                                                                   style={buttonStyle()}>Añadir</Button></Link>
-                <Outlet context={{'data': data, 'setNotificationData': setNotificationData}}/>
-            </div>
+            <Stack direction="row" sx={{marginBottom: "20px", marginTop: "20px",}} spacing={2}>
+                <SelectFilter setInputFilters={setInputFilters} inputFilters={inputFilters} filters={filters}/>
+                <Search setSearchParam={setSearchParam}/>
+            </Stack>
+            <FiltersForm setFilterParams={setFilterParams} inputFilters={inputFilters}/>
+            <CustomTable fields={fields} data={data} model={model}/>
+            <Link style={linkStyle()} to={`${location.pathname}/add`}><Button variant="contained"
+                                                                              style={buttonStyle()}>Añadir</Button></Link>
+            <Outlet context={{'data': data, 'setNotificationData': setNotificationData}}/>
         </dataContext.Provider>
     )
 }

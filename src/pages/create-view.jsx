@@ -6,7 +6,7 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import {Link} from "react-router-dom";
-import {useOutletContext, useParams} from "react-router";
+import {useLocation, useNavigate, useOutletContext, useParams} from "react-router";
 
 const style = {
     position: 'absolute',
@@ -35,12 +35,14 @@ const CreateView = ({api, fields, model_name}) => {
     const [error, setError] = useState(false)
     const [params, setParams] = useState({})
     const {data, setNotificationData} = useOutletContext()
+    const location = useLocation()
+    const navigate = useNavigate()
     const {id} = useParams()
     useEffect(() => {
         if (id) {
-            setParams(data.find(item => item['ci'] === id))
+            setParams(data.find(item => item['id'] == id))
         }
-    },);
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -74,7 +76,7 @@ const CreateView = ({api, fields, model_name}) => {
                         })
                     )
             })
-
+        navigate(`/${location.pathname.split("/")[1]}`)
     }
 
     return (
@@ -87,14 +89,14 @@ const CreateView = ({api, fields, model_name}) => {
                                 {id ? "Modificar" : "Añadir"} {model_name}
                             </Typography>
                             {id ?
-                                <CustomForm setParams={setParams} fields={fields}
-                                            values={data.find(item => item['ci'] === id)}/>
+                                <CustomForm setParams={setParams} fields={fields.filter(filter => filter !== "id")}
+                                            values={data.find(item => item['id'] == id)}/>
                                 :
-                                <CustomForm setParams={setParams} fields={fields}/>
+                                <CustomForm setParams={setParams} fields={fields.filter(filter => filter !== "id")}/>
                             }
                             <Stack spacing={2} direction="row" justifyContent="end">
                                 <Button variant="contained" type="submit" style={buttonStyle(true)}>Aceptar</Button>
-                                <Link to="/medico" style={linkStyle()}>
+                                <Link to={`/${location.pathname.split("/")[1]}`} style={linkStyle()}>
                                     <Button variant="contained" color="error"
                                             style={buttonStyle(true)}>Cancelar</Button>
                                 </Link>
@@ -103,7 +105,6 @@ const CreateView = ({api, fields, model_name}) => {
                     </Paper>
                 </Container>
             </Box>
-
         </div>
     )
 }
