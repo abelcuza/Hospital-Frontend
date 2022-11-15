@@ -33,11 +33,8 @@ const CustomTable = ({fields, data}) => {
                     <TableHead>
                         <TableRow>
                             {fields.map((field) => (
-                                <TableCell
-                                    key={tableColumnsDescription[field].id}
-                                    align={tableColumnsDescription[field].align}
-                                    style={{minWidth: tableColumnsDescription[field].minWidth}}
-                                >
+                                <TableCell key={tableColumnsDescription[field].id}
+                                           style={{minWidth: tableColumnsDescription[field].minWidth}}>
                                     {tableColumnsDescription[field].label}
                                 </TableCell>
                             ))}
@@ -53,16 +50,25 @@ const CustomTable = ({fields, data}) => {
                         {data ?
                             data.map((row) => (
                                 <TableRow key={row['ci']}>
-                                    {fields.map((field) => (
-                                        <TableCell key={field}>{row[field]}</TableCell>
-                                    ))}
+                                    {fields.map((field) => {
+                                            if (tableColumnsDescription[field].type === "select") {
+                                                return <TableCell
+                                                    key={field}>{tableColumnsDescription[field].values[row[field]]}</TableCell>
+                                            }
+                                            if (tableColumnsDescription[field].type === "list"){
+
+                                            }
+
+                                            return <TableCell key={field}>{row[field]}</TableCell>
+                                        }
+                                    )}
                                     <TableCell>
-                                        <Link to={`${location.pathname}/${row['ci']}`}>
+                                        <Link to={`${location.pathname}/${row['id']}`}>
                                             <EditIcon color="primary"/>
                                         </Link>
                                     </TableCell>
                                     <TableCell>
-                                        <Link to={`${location.pathname}/${row['ci']}/delete/`}>
+                                        <Link to={`${location.pathname}/${row['id']}/delete/`}>
                                             <Delete color="error"/>
                                         </Link>
                                     </TableCell>
