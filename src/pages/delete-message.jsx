@@ -1,6 +1,6 @@
 import React from "react"
 import Box from "@mui/material/Box";
-import {Stack} from "@mui/material";
+import {Modal, Stack} from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import {Link} from "react-router-dom";
@@ -12,7 +12,6 @@ const style = {
     top: '40%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    bgcolor: 'background.paper',
     border: '1px solid #000',
     boxShadow: 24,
     zIndex: 1202
@@ -52,10 +51,10 @@ const DeleteMessage = ({api}) => {
     }
 
     return (
-        <div className="delete-message">
-            <Box sx={style}>
+        <Modal open>
+            <Paper sx={style}>
                 <Paper variant="elevation" sx={{p: {xs: 2, md: 3}}}>
-                    <div>
+                    <div style={{textAlign: "center"}}>
                         <WarningAmber color="warning" fontSize="large"/>
                         <p>
                             Desea borrar permanentemente el elemento.
@@ -73,9 +72,8 @@ const DeleteMessage = ({api}) => {
                         </Link>
                     </Stack>
                 </Paper>
-            </Box>
-
-        </div>
+            </Paper>
+        </Modal>
     )
 }
 export default DeleteMessage

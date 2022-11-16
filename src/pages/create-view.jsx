@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react"
 import CustomForm from "../components/dashboard/custom-form";
 import Typography from "@mui/material/Typography";
-import {Container, Stack} from "@mui/material";
+import {Container, Modal, Stack} from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
@@ -13,7 +13,6 @@ const style = {
     top: '40%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    bgcolor: 'background.paper',
     border: '1px solid #000',
     boxShadow: 24,
     zIndex: 1202
@@ -80,10 +79,10 @@ const CreateView = ({api, fields, model_name}) => {
     }
 
     return (
-        <div className="create-view">
-            <Box sx={style}>
+        <Modal open>
+            <Paper sx={style}>
                 <Container component="main" maxWidth="sm" sx={{mb: 4}}>
-                    <Paper variant="string" sx={{my: {xs: 3, md: 6}, p: {xs: 2, md: 3}}}>
+                    <Box sx={{my: {xs: 3, md: 4}, p: {xs: 2, md: 3}}}>
                         <form onSubmit={handleSubmit}>
                             <Typography style={header_style} align="center" variant="h5" gutterBottom>
                                 {id ? "Modificar" : "Añadir"} {model_name}
@@ -102,10 +101,10 @@ const CreateView = ({api, fields, model_name}) => {
                                 </Link>
                             </Stack>
                         </form>
-                    </Paper>
+                    </Box>
                 </Container>
-            </Box>
-        </div>
+            </Paper>
+        </Modal>
     )
 }
 
