@@ -1,3 +1,4 @@
+const defautFecha = new Date()
 const formFieldsDescription = {
     nombre: {
         id: 'nombre',
@@ -163,13 +164,15 @@ const formFieldsDescription = {
         id: 'fecha',
         label: 'Fecha',
         required: true,
-        type: 'date'
+        type: 'date',
+        defaultValue: `${defautFecha.getFullYear()}-${defautFecha.getMonth()}-${defautFecha.getDate()}`
     },
     medicamentos: {
         id: 'medicamentos',
         label: 'Medicamentos',
         required: true,
-        type: 'list'
+        type: 'modelList',
+        model: 'medicamento'
     },
     diagnostico: {
         id: 'diagnostico',
@@ -186,6 +189,18 @@ const formFieldsDescription = {
     cantidad: {
         id: 'cantidad',
         label: 'Cantidad',
+        required: true,
+        type: 'number'
+    },
+    tipo_consulta: {
+        id: 'tipo_consulta',
+        label: 'Tipo',
+        required: true,
+        type: 'text'
+    },
+    precio: {
+        id: 'precio',
+        label: 'Precio',
         required: true,
         type: 'text'
     },

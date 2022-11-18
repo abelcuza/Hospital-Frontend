@@ -3,6 +3,7 @@ const MedicamentoModel = {
     nombre_comercial: "",
     nombre_generico: "",
     tipo: "",
+    precio:""
 }
 
 export default MedicamentoModel;

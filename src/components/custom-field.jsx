@@ -2,10 +2,11 @@ import React from "react"
 import SelectField from "./select-field";
 import ModelField from "./model-field";
 import TextField from "@mui/material/TextField";
+import ModelListField from "./model-list-field";
 
 
 const CustomField = (props) => {
-    const {id, label, required, type, setParams, fullWidth, defaultValue} = props
+    const {id, label, required, type, setParams, fullWidth, defaultValue, step} = props
 
     const handleChange = (event) => {
         const {name, value} = event.target
@@ -16,6 +17,9 @@ const CustomField = (props) => {
     if (type === 'select') {
         return <SelectField {...props}/>
     }
+    if (type === 'modelList'){
+        return <ModelListField {...props}/>
+    }
     if (type === 'model') {
         return <ModelField {...props}/>
     }
@@ -25,11 +29,13 @@ const CustomField = (props) => {
                        required={required}
                        id={id}
                        name={id}
+                       type={type}
                        label={label}/>
             :
             <TextField fullWidth={fullWidth} size="small" onChange={handleChange}
                        required={required}
                        id={id}
+                       type={type}
                        name={id}
                        label={label}/>
     )

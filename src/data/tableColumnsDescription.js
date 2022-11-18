@@ -148,6 +148,18 @@ const tableColumnsDescription = {
         minWidth: 170,
         type: 'text'
     },
+    precio: {
+        id: 'precio',
+        label: 'Precio (CUP)',
+        minWidth: 170,
+        type: 'text'
+    },
+    tipo_consulta: {
+        id: 'tipo_consulta',
+        label: 'Tipo',
+        minWidth: 170,
+        type: 'text'
+    },
 };
 
 export default tableColumnsDescription

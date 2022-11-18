@@ -12,8 +12,6 @@ const ColorModeContext = createContext({
 })
 
 function MyApp() {
-    const theme = useTheme();
-    const colorMode = useContext(ColorModeContext);
     const routes = useRoutes([
         ...authRoutes,
         ...publicRoutes

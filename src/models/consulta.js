@@ -4,6 +4,7 @@ const ConsultaModel = {
     paciente: "",
     fecha: "",
     medicamentos: [],
+    tipo_consulta: "",
     diagnostico: ""
 }
 
